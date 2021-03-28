@@ -4,9 +4,9 @@ import java.util.List;
 
 public class Dealer {
 
-    int dealerId;
-    String name;
-    List<Vehicle> vehicleList;
+    private int dealerId;
+    private String name;
+    private List<Vehicle> vehicles;
 
     public Dealer() {
     }
@@ -27,11 +27,23 @@ public class Dealer {
         this.name = name;
     }
 
-    public List<Vehicle> getVehicleList() {
-        return vehicleList;
+    public List<Vehicle> getVehicles() {
+        return vehicles;
     }
 
-    public void setVehicleList(List<Vehicle> vehicleList) {
-        this.vehicleList = vehicleList;
+    public void setVehicles(List<Vehicle> vehicleList) {
+        this.vehicles = vehicleList;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "dealer [dealerId="
+                + dealerId
+                + ", name="
+                + name
+                + ", vehicles="
+                + vehicles
+                + "]";
     }
 }

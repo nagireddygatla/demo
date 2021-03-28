@@ -3,9 +3,9 @@ package com.cox.interview.model;
 import java.util.List;
 
 public class Dataset {
-    String datasetId;
-    List<Dealer> dealerSet;
-    List<Vehicle> vehicleSet;
+    private String datasetId;
+    private List<Dealer> dealers;
+
 
     public Dataset() {
     }
@@ -18,19 +18,21 @@ public class Dataset {
         this.datasetId = datasetId;
     }
 
-    public List<Dealer> getDealerSet() {
-        return dealerSet;
+    public List<Dealer> getDealers() {
+        return dealers;
     }
 
-    public void setDealerSet(List<Dealer> dealerSet) {
-        this.dealerSet = dealerSet;
+    public void setDealers(List<Dealer> dealerSet) {
+        this.dealers = dealerSet;
     }
 
-    public List<Vehicle> getVehicleSet() {
-        return vehicleSet;
-    }
-
-    public void setVehicleSet(List<Vehicle> vehicleSet) {
-        this.vehicleSet = vehicleSet;
+    @Override
+    public String toString()
+    {
+        return "dataset [datasetId="
+                + datasetId
+                + ", dealers="
+                + dealers
+                + "]";
     }
 }

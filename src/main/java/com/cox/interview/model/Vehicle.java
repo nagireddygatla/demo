@@ -1,10 +1,10 @@
 package com.cox.interview.model;
 
 public class Vehicle {
-    int vehicleId;
-    int year;
-    String make;
-    String model;
+    private int vehicleId;
+    private int year;
+    private String make;
+    private String model;
 
     public Vehicle() {
 
@@ -40,5 +40,19 @@ public class Vehicle {
 
     public void setModel(String model) {
         this.model = model;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Vehicle [vehicleId="
+                + vehicleId
+                + ", year="
+                + year
+                + ", make="
+                + make
+                + ", model="
+                + model
+                + "]";
     }
 }
