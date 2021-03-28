@@ -1,4 +1,4 @@
-package com.example.restservice;
+package com.cox.interview.model;
 
 
 public class Greeting {

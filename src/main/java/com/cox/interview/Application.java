@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.cox.interview;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +12,6 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 @SpringBootApplication
-@ComponentScan("com.example.restservice")
 public class Application extends SpringBootServletInitializer {
 
 	private static final Logger LOG = LoggerFactory.getLogger(Application.class);
