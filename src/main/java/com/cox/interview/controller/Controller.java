@@ -22,7 +22,17 @@ public class Controller {
 
     @PostMapping("/{datasetId}/answer")
     public String postAnswer(@RequestBody Dataset dataset, @PathVariable String datasetId) {
-        return datasetService.postDataset(dataset, datasetId);
+        Long startTime = System.currentTimeMillis();
+        boolean result = datasetService.postDataset(dataset, datasetId);
+        Long endTime = System.currentTimeMillis();
+        Long elapsedTime = endTime - startTime;
+        String answerJson = "{\"success\":" + result + ",\"message\":Answer is Posted, \"totalMillisecond\":"+elapsedTime+"}";
+        return answerJson;
+    }
+
+    @GetMapping("/{datasetId}/cheat")
+    public String getCheat(@PathVariable String datasetId) {
+        return datasetService.getCheat(datasetId);
     }
 
     @GetMapping("/{datasetId}/dealers/{dealerId}")
@@ -37,7 +47,6 @@ public class Controller {
 
     @GetMapping("/{datasetId}/vehicles/{vehicleId}")
     public String getVehicle(@PathVariable String datasetId, @PathVariable String vehicleId) {
-        System.out.println("We are here");
         return datasetService.getVehicle(datasetId, vehicleId);
     }
 }

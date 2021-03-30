@@ -1,12 +1,9 @@
 package com.cox.interview.service;
-
-
 import com.cox.interview.model.Dataset;
 import com.cox.interview.model.Dealer;
 import com.cox.interview.model.Vehicle;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -18,17 +15,18 @@ public class DatasetService {
 
     public String createDataset(String datasetId){
         try {
+
             File targetFile = new File(datasetId + ".json");
             boolean success = targetFile.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return datasetId;
-
+        String datasetJson = "{\"datasetId\":\"" +datasetId+"\"}";
+        return datasetJson;
     }
 
-    public String postDataset(Dataset dataset, String datasetId){
+    public boolean postDataset(Dataset dataset, String datasetId){
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String jsonString = gson.toJson(dataset);
@@ -40,7 +38,21 @@ public class DatasetService {
             e.printStackTrace();
         }
 
-        return jsonString;
+        return true;
+    }
+
+    public String getCheat(String datasetId){
+
+        Gson gson = new Gson();
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(datasetId + ".json"));
+            Dataset dataset = new Gson().fromJson(bufferedReader, Dataset.class);
+            return gson.toJson(dataset);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     public String getDealer(String datasetId, String dealerId){
@@ -61,8 +73,7 @@ public class DatasetService {
             e.printStackTrace();
         }
 
-
-        return null;
+        return "Dealer Not Present with that ID!";
     }
 
     public String getVehicles(String datasetId){
@@ -107,12 +118,15 @@ public class DatasetService {
 
             for(int i = 0; i<dealers.size(); i++){
                 List<Vehicle> vehicles = dealers.get(i).getVehicles();
+                int dealer = dealers.get(i).getDealerId();
                 for(int j = 0; j< vehicles.size();j++){
                     if(vehicles.get(j).getVehicleId() == Integer.parseInt(vehicleId)){
                         Vehicle vehicle = vehicles.get(j);
                         Gson gson = new Gson();
                         String vehicleJson = gson.toJson(vehicle);
-                        return vehicleJson;
+                        String vehicleJsonTruncated = new StringBuffer(vehicleJson).deleteCharAt(vehicleJson.length()-1).toString();
+                        vehicleJsonTruncated = vehicleJsonTruncated + ",\"dealerId\":" + dealer + "}";
+                        return vehicleJsonTruncated;
                     }
                 }
             }
@@ -122,6 +136,6 @@ public class DatasetService {
         }
 
 
-        return null;
+        return "Vehicle Not Present with that ID";
     }
 }
